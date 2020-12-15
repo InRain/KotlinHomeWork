@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         greetings = getString(R.string.hello)
         name = savedInstanceState?.getString(NAME_KEY) ?: getString(R.string.anon)
 
+
         buttonNameYourSelf.setOnClickListener {
             val intent = Intent(this, SecondActivity::class.java)
             startActivityForResult(intent, SecondActivity.GET_NAME_REQUEST_CODE)
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SecondActivity.GET_NAME_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val nameFromData = data.extras?.getString(SecondActivity.NAME_KEY)
-            nameFromData?.let{
+
+            nameFromData?.let {
                 name = nameFromData
             }
         }
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         textViewHello?.text = getString(R.string.hello_message, greetings, name)
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
